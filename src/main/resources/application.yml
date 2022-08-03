@@ -21,5 +21,8 @@ management:
       exposure:
         include: '*'
 
+eureka:
+  client: ${eureka-client}
+
 application:
   allow-get-customers: ${accounts.allow-get-customers}
