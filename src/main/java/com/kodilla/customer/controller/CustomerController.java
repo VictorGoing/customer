@@ -7,14 +7,16 @@ import com.kodilla.customer.dto.CustomerDto;
 import com.kodilla.customer.mapper.CustomerMapper;
 import com.kodilla.customer.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RefreshScope
-@RequestMapping("/v1/accounts")
+@RequestMapping("/v1/customer")
 @RequiredArgsConstructor
 public class CustomerController {
 
@@ -29,7 +31,7 @@ public class CustomerController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveNewCustomer(@RequestBody CustomerDto customerDto){
         Customer customer = customerMapper.mapNewCustomer(customerDto);
         customerService.saveCustomer(customer);
