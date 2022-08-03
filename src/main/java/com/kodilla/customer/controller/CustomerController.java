@@ -5,6 +5,7 @@ import com.kodilla.customer.controller.response.GetCustomerProductsResponse;
 import com.kodilla.customer.controller.response.GetCustomerResponse;
 import com.kodilla.customer.domain.Customer;
 import com.kodilla.customer.dto.AccountDto;
+import com.kodilla.customer.dto.CardDto;
 import com.kodilla.customer.dto.CustomerDto;
 import com.kodilla.customer.exception.CustomerNotFoundException;
 import com.kodilla.customer.mapper.CustomerMapper;
@@ -47,11 +48,13 @@ public class CustomerController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         CustomerDto customerDto = customerMapper.mapToCustomerDto(customer);
         List<AccountDto> customerAccounts = productService.findCustomerAccounts(customerId);
+        List<CardDto> customerCards = productService.findCustomerCards(customerId);
 
         return GetCustomerProductsResponse.builder()
                 .customerId(customerDto.getId())
                 .fullName(customerDto.getFirstName() + " " + customerDto.getLastName())
                 .accounts(customerAccounts)
+                .cards(customerCards)
                 .build();
     }
 
