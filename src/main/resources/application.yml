@@ -26,3 +26,7 @@ eureka:
 
 application:
   allow-get-customers: ${accounts.allow-get-customers}
+
+feign:
+  hystrix:
+    enabled: true
